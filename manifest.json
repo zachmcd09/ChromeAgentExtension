@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Chromie Browser Assistant",
+  "version": "1.0",
+  "description": "AI-powered browser assistant that helps you navigate and interact with web content",
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "scripting",
+    "alarms",
+    "storage",
+    "tabs",
+    "nativeMessaging",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:1234/*",
+    "*://*.google.com/*"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "icons/Chromie_Logo.png",
+      "48": "icons/Chromie_Logo.png",
+      "128": "icons/Chromie_Logo.png"
+    },
+    "default_title": "Click to toggle side panel"
+  },
+  "icons": {
+    "16": "icons/Chromie_Logo.png",
+    "48": "icons/Chromie_Logo.png",
+    "128": "icons/Chromie_Logo.png"
+  },
+  "background": {
+    "service_worker": "dist/service-worker.bundle.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["https://www.google.com/search*"],
+      "js": ["dist/content-script.bundle.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["permission/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+ "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chromie</title>
+  <link rel="stylesheet" href="css/sidepanel1.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Progress bar container at the top -->
+  <div id="progressContainer">
+    <div id="progressText">Processing page content...</div>
+    <div id="progressBar">0%</div>
+  </div>
+
+  <div class="header">
+    <div class="title-bar">
+      <h1>Chromie</h1>
+      <span class="material-icons settings-icon" id="settingsIcon">settings</span>
+    </div>
+  </div>
+
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-content">
+      <h3>Settings</h3>
+      <div class="setting-item">
+        <label for="osToggle">Operating System:</label>
+        <select id="osToggle">
+          <option value="mac">macOS</option>
+          <option value="windows">Windows/Linux</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label for="conversationMode">Conversation Mode:</label>
+        <div class="toggle-switch">
+          <input type="checkbox" id="conversationMode">
+          <label for="conversationMode" class="toggle-label"></label>
+        </div>
+      </div>
+      <div class="setting-item">
+        <label for="contextWindow">Context Window Size:</label>
+        <input type="number" id="contextWindow" value="32768" min="2048" max="128000" step="1000">
+      </div>
+      <div class="setting-item">
+        <label for="apiEndpoint">API Endpoint:</label>
+        <input type="text" id="apiEndpoint" value="http://localhost:1234/v1" placeholder="Enter API endpoint">
+      </div>
+      <div class="setting-item">
+        <label for="apiKey">API Key:</label>
+        <input type="password" id="apiKey" placeholder="Enter API key">
+      </div>
+      <div class="setting-item">
+        <label for="model">Model:</label>
+        <input type="text" id="model" value="qwen2.5-coder-7b-instruct-mlx" placeholder="Enter model name">
+      </div>
+      <div class="setting-item">
+        <label for="embeddingsEndpoint">Embeddings Endpoint:</label>
+        <input type="text" id="embeddingsEndpoint" value="http://localhost:1234" placeholder="Enter embeddings endpoint">
+      </div>
+      <div class="setting-item">
+        <label for="embeddingsApiKey">Embeddings API Key:</label>
+        <input type="password" id="embeddingsApiKey" placeholder="Enter embeddings API key">
+      </div>
+      <div class="setting-item">
+        <label for="embeddingsModel">Embeddings Model:</label>
+        <input type="text" id="embeddingsModel" value="text-embedding-all-minilm-l6-v2-embedding" placeholder="Enter embeddings model">
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="chat-section">
+      <div class="chat-header">
+        <h3>Chat</h3>
+        <button id="clearChatButton" title="Clear chat history">Clear</button>
+      </div>
+      <div id="responseContainer"></div>
+      <div class="input-container">
+        <div class="input-wrapper">
+          <input type="text" id="textInput" placeholder="Enter text...">
+          <button id="micButton" class="mic-button" title="Click to speak">
+            <span class="material-icons">mic</span>
+          </button>
+        </div>
+        <button id="sendDataButton">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading bubble -->
+  <div class="loading-bubble" id="loadingBubble">
+    <span class="typing-text">Chromie is typing</span>
+    <div class="typing-animation">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- External scripts (no inline handlers) -->
+  <script type="module" src="dist/injectPermissionIframe.bundle.js"></script>
+  <script type="module" src="dist/browserAgent.bundle.js"></script>
+  <script type="module" src="dist/browserControl.bundle.js"></script>
+  <script type="module" src="dist/sendToEndpoint.bundle.js"></script>
+  <script type="module" src="dist/speechHandler.bundle.js"></script>
+</body>
+</html>
